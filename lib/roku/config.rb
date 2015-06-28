@@ -12,7 +12,7 @@ module Roku
     private
 
     def config
-      (@config ||= fetch_config).tap do |config|
+      @config ||= fetch_config.tap do |config|
         @directory = config['directory'] if config['directory']
       end
     rescue Errno::ENOENT
