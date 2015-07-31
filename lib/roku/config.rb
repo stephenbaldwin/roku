@@ -14,6 +14,7 @@ module Roku
     def config
       @config ||= fetch_config.tap do |config|
         @directory = config['directory'] if config['directory']
+        @build_output = Time.now.strftime(config['output']) if config['output']
       end
     rescue Errno::ENOENT
       raise Exception::NotConfigured, "Please configure gem. See https://github.com/stephenbaldwin/roku#configuration for more information"
