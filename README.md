@@ -53,6 +53,26 @@ username    : "rokudev"
 password    : "1234"
 ```
 
+### Build Output
+
+By default builds will output to a temporary directory. You may specify the build output in the roku.yml configuration file with the key `output`.
+
+Example File:
+```yml
+ip          : "192.168.1.6"
+username    : "rokudev"
+password    : "1234"
+directory   : "/Users/exampleuser/code/brightscript/example_project"
+output      : "/Users/exampleuser/code/brightscript/example_project/builds/roku.zip"
+```
+
+**Note:** You may use Time conversion specifications in the output name.
+
+```yml
+output      : "/Users/exampleuser/code/brightscript/example_project/builds/roku-%m-%d-%Y.zip"
+# Translates into "/Users/exampleuser/code/brightscript/example_project/builds/roku-01-20-2015.zip"
+```
+
 ## Usage
 
 Depending on your configuration (see above), simply run `roku` from your command line to build and deploy your project to your Roku development box. 
