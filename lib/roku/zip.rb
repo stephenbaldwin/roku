@@ -1,13 +1,24 @@
 # This example is pulled straight from https://github.com/rubyzip/rubyzip/blob/master/samples/example_recursive.rb
-# With the exception of a minor class method addition on line 8 and dot file exclusion on line 9
+# With the exception of:  
+#   minor class method addition on line 12
+#   dot file exclusion on line 14
+#   is_build_directory? method on line 18
+#
+# TODO: This file is in need of complete rewrite
+#
 require 'zip'
 
 module Roku
   class Zip
 
     def self.generate(input, output); new(input, output).write; end
+
     def files_in(dir)
-      Dir.entries(dir).select {|file| file =~ /^[^\.]/ }
+      Dir.entries(dir).select {|file| file =~ /^[^\.]/ && !is_build_directory?(dir, file) }
+    end
+
+    def is_build_directory?(current_directory, file)
+      !!(@outputFile =~ Regexp.new(current_directory + "/#{file}/(?:[^\/]*)\.zip"))
     end
 
     # Initialize with the directory to zip and the location of the output archive.
